@@ -1,0 +1,12 @@
+logging.level.org.springframework.data.couchbase.repository.query: DEBUG
+
+server:
+  port: 8083
+
+couchbase:
+  cluster.ip: localhost
+  username: admin
+  bucket:
+    name: cod
+    password: passwd
+
