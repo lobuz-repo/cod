@@ -1,4 +1,4 @@
-package com.lobuz.core.cod.converter;
+package com.lobuz.core.cod.mapper.converter;
 
 import com.lobuz.core.cod.api.request.ArticleAddRequest;
 import com.lobuz.core.cod.api.snapshot.ArticleSnapshot;
@@ -17,7 +17,7 @@ public class WikiMapper {
         this.generator = generator;
     }
 
-    public Article mapToArticle(ArticleAddRequest request) {
+    public Article converter(ArticleAddRequest request) {
         return Article.builder()
                 .id(generator.getId())
                 .title(request.getTitle())
@@ -25,10 +25,9 @@ public class WikiMapper {
                 .authorId(request.getAuthorId())
                 .creationTime(getCurrentTime())
                 .build();
-//        return new Article(request.getTitle(), request.getContent(), request.getUserId(), getCurrentTime());
     }
 
-    public ArticleSnapshot mapArticleToSnapshot(Article article) {
+    public ArticleSnapshot converter(Article article) {
         return ArticleSnapshot.builder()
                 .id(article.getId())
                 .title(article.getTitle())

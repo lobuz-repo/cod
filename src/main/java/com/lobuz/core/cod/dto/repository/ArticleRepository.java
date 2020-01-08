@@ -8,11 +8,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ArticleRepository  extends CouchbaseRepository<Article, String> {
+public interface ArticleRepository extends CouchbaseRepository<Article, String> {
 
 //    Page<Article> findAllByAuthorId(Pageable pageable, Long authorId);
-//
-//    boolean existsArticleByAuthorId(Long authorId);
-//
-//    void deleteAllByAuthorId(Long authorId);
+
+    boolean existsArticleByAuthorId(String authorId);
+
+    void deleteAllByAuthorId(String authorId);
 }

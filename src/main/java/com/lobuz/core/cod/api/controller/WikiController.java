@@ -2,24 +2,31 @@ package com.lobuz.core.cod.api.controller;
 
 import com.lobuz.core.cod.api.request.ArticleAddRequest;
 import com.lobuz.core.cod.api.snapshot.ArticleSnapshot;
+import com.lobuz.core.cod.data.CategoryModel;
+import com.lobuz.core.cod.service.ManagementWikiService;
 import com.lobuz.core.cod.service.WikiService;
-import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/wiki/article")
-@AllArgsConstructor
 public class WikiController {
 
     private final WikiService service;
+    private final ManagementWikiService managementWikiService;
+
+    public WikiController(WikiService service, ManagementWikiService managementWikiService) {
+        this.service = service;
+        this.managementWikiService = managementWikiService;
+    }
 
     @GetMapping
-    public Page<ArticleSnapshot> getAllArticles(Pageable pageable) {
-        return service.getAllArticles(pageable);
+    public List<ArticleSnapshot> getAllArticles() {
+        return service.getAllArticles();
     }
 
     @GetMapping("/{articleId}")
@@ -28,8 +35,8 @@ public class WikiController {
     }
 
     @GetMapping("/author/{authorId}")
-    public Page<ArticleSnapshot> getArticleByAuthorId(Pageable pageable, @PathVariable String authorId) {
-        return service.getArticleByAuthorId(pageable, authorId);
+    public List<ArticleSnapshot> getArticleByAuthorId(@PathVariable String authorId) {
+        return service.getArticleByAuthorId(authorId);
     }
 
     @PostMapping("/add")
@@ -45,6 +52,11 @@ public class WikiController {
     @DeleteMapping("/delete/author/{authorId}")
     public void deleteArticleByAuthorId(@PathVariable String authorId) {
         service.deleteArticleByAuthorId(authorId);
+    }
+
+    @GetMapping("/file")
+    public CategoryModel[] getArticleCategories() {
+        return managementWikiService.getArticleCategories();
     }
 
 }

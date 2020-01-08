@@ -2,3 +2,5 @@ spring:
   application:
     name: cod
   profiles.active: development
+
+categories: classpath:categories/categories.json

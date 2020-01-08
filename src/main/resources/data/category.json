@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "category": "sport"
+  },
+  {
+    "id": 2,
+    "category": "polityka"
+  },
+  {
+    "id": 3,
+    "category": "wiadomosci"
+  },
+  {
+    "id": 4,
+    "category": "nauka"
+  },
+  {
+    "id": 5,
+    "category": "rozrywka"
+  }
+]

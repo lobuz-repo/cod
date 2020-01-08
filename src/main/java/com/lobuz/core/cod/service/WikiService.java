@@ -2,8 +2,8 @@ package com.lobuz.core.cod.service;
 
 import com.lobuz.core.cod.api.request.ArticleAddRequest;
 import com.lobuz.core.cod.api.snapshot.ArticleSnapshot;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+
+import java.util.List;
 
 public interface WikiService {
 
@@ -11,9 +11,9 @@ public interface WikiService {
 
     ArticleSnapshot getArticleById(String articleId);
 
-    Page<ArticleSnapshot> getArticleByAuthorId(Pageable pageable, String authorId);
+    List<ArticleSnapshot> getArticleByAuthorId(String authorId);
 
-    Page<ArticleSnapshot> getAllArticles(Pageable pageable);
+    List<ArticleSnapshot> getAllArticles();
 
     void deleteArticleById(String articleId);
 
