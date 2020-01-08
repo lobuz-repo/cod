@@ -2,17 +2,13 @@ package com.lobuz.core.cod.api.snapshot;
 
 import lombok.Builder;
 import lombok.Data;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.couchbase.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
 @Builder
 @Data
-@Document
 public class ArticleSnapshot {
 
-    @Id
     private String id;
 
     private String title;
@@ -20,6 +16,10 @@ public class ArticleSnapshot {
     private String content;
 
     private String authorId;
+
+    private String category;
+
+    private String type;
 
     private LocalDateTime creationTime;
 }

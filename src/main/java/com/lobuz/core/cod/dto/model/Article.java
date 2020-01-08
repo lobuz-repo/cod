@@ -21,6 +21,10 @@ public class Article {
 
     private String authorId;
 
+    private String category;
+
+    private String type;
+
     private LocalDateTime creationTime;
 
 

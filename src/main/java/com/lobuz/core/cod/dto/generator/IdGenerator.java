@@ -5,10 +5,9 @@ import org.springframework.stereotype.Component;
 import java.util.UUID;
 
 @Component
-public class IdGenerator {
+public abstract class IdGenerator {
 
-    public String getId() {
+    public static String getId() {
         return UUID.randomUUID().toString();
     }
-
 }

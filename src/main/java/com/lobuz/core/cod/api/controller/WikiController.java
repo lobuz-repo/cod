@@ -5,13 +5,11 @@ import com.lobuz.core.cod.api.snapshot.ArticleSnapshot;
 import com.lobuz.core.cod.data.CategoryModel;
 import com.lobuz.core.cod.service.ManagementWikiService;
 import com.lobuz.core.cod.service.WikiService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
-@Slf4j
 @RestController
 @RequestMapping("/wiki/article")
 public class WikiController {
@@ -55,7 +53,7 @@ public class WikiController {
     }
 
     @GetMapping("/file")
-    public CategoryModel[] getArticleCategories() {
+    public List<CategoryModel> getArticleCategories() {
         return managementWikiService.getArticleCategories();
     }
 

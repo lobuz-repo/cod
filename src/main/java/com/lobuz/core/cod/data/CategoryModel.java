@@ -1,12 +1,8 @@
 package com.lobuz.core.cod.data;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class CategoryModel {
 
     private String id;
@@ -14,7 +10,7 @@ public class CategoryModel {
 
     @Override
     public String toString() {
-        return "CategoryModel{" +
+        return "read from JSON file {" +
                 "id='" + id + '\'' +
                 ", category='" + category + '\'' +
                 '}';

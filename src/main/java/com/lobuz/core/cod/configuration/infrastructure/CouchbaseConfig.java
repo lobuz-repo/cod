@@ -1,4 +1,4 @@
-package com.lobuz.core.cod.configuration;
+package com.lobuz.core.cod.configuration.infrastructure;
 
 
 import java.time.LocalDate;

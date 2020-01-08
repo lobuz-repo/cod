@@ -2,17 +2,18 @@ package com.lobuz.core.cod.service;
 
 import com.lobuz.core.cod.api.request.ArticleAddRequest;
 import com.lobuz.core.cod.api.snapshot.ArticleSnapshot;
+import com.lobuz.core.cod.data.DocumentTypeEnum;
 import com.lobuz.core.cod.dto.model.Article;
 import com.lobuz.core.cod.dto.repository.ArticleRepository;
 import com.lobuz.core.cod.exception.WikiException;
-
 import com.lobuz.core.cod.mapper.converter.WikiMapper;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static java.util.Objects.nonNull;
 
 
 @Service
@@ -46,22 +47,25 @@ public class WikiServiceImpl implements WikiService {
     @Transactional(readOnly = true)
     public List<ArticleSnapshot> getArticleByAuthorId(String authorId) {
 
-//        if (repository.existsArticleByAuthorId(authorId)) {
-//            return repository.findAllByAuthorId(pageable, authorId)
-//                    .map(mapper::mapArticleToSnapshot);
-//        }
+        List<Article> articles = repository.findAllByAuthorId(authorId);
+
+        if (nonNull(articles) && !articles.isEmpty()) {
+            return articles.stream()
+                    .map(mapper::converter)
+                    .collect(Collectors.toList());
+        }
         throw WikiException.articleNotFound();
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<ArticleSnapshot> getAllArticles() {
-        Iterable<Article> all = repository.findAll();
-all.forEach(mapper::converter);
-//        return repository.findAll()
-//                .map(mapper::mapArticleToSnapshot);
-        return null;
+        List<Article> articles = repository.findAllByType(DocumentTypeEnum.ARTICLE.getType());
+        return articles.stream()
+                .map(mapper::converter)
+                .collect(Collectors.toList());
     }
+
 
     @Override
     @Transactional
@@ -76,9 +80,9 @@ all.forEach(mapper::converter);
     @Override
     @Transactional
     public void deleteArticleByAuthorId(String authorId) {
-        if (repository.existsArticleByAuthorId(authorId)) {
+        try {
             repository.deleteAllByAuthorId(authorId);
-        } else {
+        } catch (Exception e) {
             throw WikiException.articleNotFound();
         }
     }

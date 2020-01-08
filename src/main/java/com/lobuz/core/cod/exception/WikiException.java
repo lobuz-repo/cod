@@ -4,7 +4,7 @@ import org.springframework.http.HttpStatus;
 
 public class WikiException extends CoreException {
 
-    private static final int ARTICLE_NOT_FOUND = 8001;
+    private static final int ARTICLE_NOT_FOUND = 420;
 
     public WikiException(int code, String message, String description, HttpStatus status) {
         super(code, message, description, status);
